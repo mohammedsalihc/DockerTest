@@ -37,4 +37,4 @@ jobs:
             docker load < ts-demo.tar.gz
             docker stop ts-demo || true
             docker rm ts-demo || true
-            docker run -d -p 8000:8000 --name ts-demo ts-demo
+            docker run -d -p 8000:8000 --env-file /home/ubuntu/.env --name ts-demo ts-demo
