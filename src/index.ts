@@ -19,4 +19,8 @@ app.get('/amal',(req,res)=>{
     res.send("hello from amal")
 })
 
+app.get('/akhil',(req,res)=>{
+    res.send('akhil')
+})
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
