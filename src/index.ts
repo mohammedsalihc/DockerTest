@@ -11,4 +11,8 @@ app.get('/subha',(req,res)=>{
     res.send("Hello from Subha");
 })
 
+app.get('/salih',(req,res)=>{
+    res.send("hello from  salih")
+})
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
