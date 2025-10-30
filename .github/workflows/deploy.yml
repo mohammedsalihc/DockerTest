@@ -1,0 +1,40 @@
+name: CI/CD to EC2 with Docker
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t ts-demo .
+
+      - name: Save image to file
+        run: docker save ts-demo | gzip > ts-demo.tar.gz
+
+      - name: Copy image to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "ts-demo.tar.gz"
+          target: "/home/ubuntu/"
+
+      - name: Deploy on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker load < ts-demo.tar.gz
+            docker stop ts-demo || true
+            docker rm ts-demo || true
+            docker run -d -p 8000:8000 --name ts-demo ts-demo

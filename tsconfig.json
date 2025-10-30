@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    /* ===== OUTPUT SETTINGS ===== */
+    "outDir": "./dist",                // compiled JS output folder
+    "rootDir": "./src",                // source code folder
+    "target": "ES2019",                // modern Node-compatible JS
+    "module": "CommonJS",              // for Node.js environment
+
+    /* ===== MODULE RESOLUTION ===== */
+    "esModuleInterop": true,           // allows default import of CJS modules like express
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",        // how TS finds imported modules
+    "resolveJsonModule": true,         // lets you import .json files
+    "types": ["node", "express"],      // adds Node & Express type definitions
+
+    /* ===== TYPE CHECKING ===== */
+    "strict": true,                    // enables all strict type checks
+    "skipLibCheck": true,              // skips type-checking of node_modules (faster)
+    "forceConsistentCasingInFileNames": true,
+
+    /* ===== JS INTEROP ===== */
+    "allowJs": false,                  // disallow JS files (only TS)
+    "noEmitOnError": true,             // don’t emit JS if errors exist
+
+    /* ===== SOURCE MAPS (for debugging) ===== */
+    "sourceMap": true,                 // generate .map files for debugging
+    "inlineSources": true              // include original TS source in map files
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
