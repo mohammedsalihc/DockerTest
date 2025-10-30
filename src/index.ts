@@ -1,7 +1,7 @@
 import express from 'express'
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT 
 
 app.get("/", (_, res) => {
   res.send("🚀 Hello from TypeScript + Docker + EC2!");
